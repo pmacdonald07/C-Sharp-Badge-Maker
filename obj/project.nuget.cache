@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "hiU1O2cTZQP1WTNrcxd3JX5wh64mfj4QsBSS/2vXWhGxIm4mF3NG2qS/35qJ6pRDnpMk2uwMMLx0BwO9nNRYyA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\patri\\Desktop\\projects\\CatWorx.BadgeMaker\\CatWorx.BadgeMaker.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\patri\\.nuget\\packages\\skiasharp\\2.88.3\\skiasharp.2.88.3.nupkg.sha512",
+    "C:\\Users\\patri\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.3\\skiasharp.nativeassets.macos.2.88.3.nupkg.sha512",
+    "C:\\Users\\patri\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.3\\skiasharp.nativeassets.win32.2.88.3.nupkg.sha512"
+  ],
+  "logs": []
+}
