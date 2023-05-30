@@ -13,16 +13,17 @@ namespace CatWorx.BadgeMaker
         public static void PrintEmployees(List<Employee> employees)
         {
             for (int i = 0; i < employees.Count; i++)
-        {
-            // We want the first argument (argument {0}), the id, to be left-aligned and padded to at least 10 characters, so we enter {0,-10}.
-            // Then we want to print a tab character (\t). We want the next argument ({1}), the name, to be left-aligned and padded to 20 characters—hence {1,-20}.
-            // Next, we want to print another tab character (\t). And finally, we want to print the last argument ({2}), the photo URL, with no formatting: {2}.
-            string template = "{0, -10}\t{1, -20}\t{2}";
-            Console.WriteLine(String.Format(template, employees[i].GetId(), employees[i].GetFullName(), employees[i].GetPhotoUrl()));
-        }
+            {
+                // We want the first argument (argument {0}), the id, to be left-aligned and padded to at least 10 characters, so we enter {0,-10}.
+                // Then we want to print a tab character (\t). We want the next argument ({1}), the name, to be left-aligned and padded to 20 characters—hence {1,-20}.
+                // Next, we want to print another tab character (\t). And finally, we want to print the last argument ({2}), the photo URL, with no formatting: {2}.
+                string template = "{0, -10}\t{1, -20}\t{2}";
+                Console.WriteLine(String.Format(template, employees[i].GetId(), employees[i].GetFullName(), employees[i].GetPhotoUrl()));
+            }
         }
 
-        public static void MakeCSV(List<Employee> employees) {
+        public static void MakeCSV(List<Employee> employees)
+        {
             // Check to see if folder exists
             if (!Directory.Exists("data"))
             {
@@ -42,7 +43,8 @@ namespace CatWorx.BadgeMaker
             }
         }
 
-        async public static Task MakeBadges(List<Employee> employees) {
+        async public static Task MakeBadges(List<Employee> employees)
+        {
             // Layout variables
             int BADGE_WIDTH = 669;
             int BADGE_HEIGHT = 1044;
@@ -56,8 +58,10 @@ namespace CatWorx.BadgeMaker
             int EMPLOYEE_ID_Y = 730;
 
             // instance of HttpClient is disposed after code in the block has run
-            using(HttpClient client = new HttpClient()) {
-                for (int i = 0; i < employees.Count; i++) {
+            using (HttpClient client = new HttpClient())
+            {
+                for (int i = 0; i < employees.Count; i++)
+                {
                     SKImage photo = SKImage.FromEncodedData(await client.GetStreamAsync(employees[i].GetPhotoUrl()));
                     SKImage background = SKImage.FromEncodedData(File.OpenRead("badge.png"));
 
@@ -97,6 +101,27 @@ namespace CatWorx.BadgeMaker
                     // https://placekitten.com/400/400
 
                 }
+            }
+        }
+
+        async public static Task<List<Employee>> checkRetrievalMethod()
+        {
+            Console.WriteLine("Would you like to retrieve employees through an API or enter them in the console? (type 'api' or 'console')");
+            string retrievalMethod = Console.ReadLine() ?? "";
+            if (retrievalMethod == "console")
+            {
+                List<Employee> employees = PeopleFetcher.GetEmployees();
+                return employees;
+            }
+            else if (retrievalMethod == "api")
+            {
+                List<Employee> employees = await PeopleFetcher.GetFromApi();
+                return employees;
+            }
+            else
+            {
+                List<Employee> employees = await checkRetrievalMethod();
+                return employees;
             }
         }
     }
